@@ -9,10 +9,13 @@ using LazyArrays ## for @~ to speed up Qi calculations
     reject_independence(D, n, α)
 
     Compute the D-test of independence. 
-    Given a D value, a n representing the number of observations, and α (0 < α < 1) the desired level of significance.
-
-    Return true to indicate rejection of H0 the hypothesis of independence.
-    The implementation is based upong the chapter 9 in the paper from Wassily Hoeffding.
+    Compute the D-test of independence. 
+        Given:
+        a D (the calculated D measure),
+        a n (the number of observations), 
+        and a α (0 < α < 1) the desired level of significance.
+    Return true to indicate rejection of H₀ hypothesis of independence.
+    The implementation is based upon chapter 9 in the paper from Wassily Hoeffding (1948).
 
 """
 
@@ -26,7 +29,7 @@ end
 
 Compute the Hoeffding measure of independence of the two continuous random variables. As defined by Hoeffding [A Non-Parametric Test of Independence](https://projecteuclid.org/journals/annals-of-mathematical-statistics/volume-19/issue-4/A-Non-Parametric-Test-of-Independence/10.1214/aoms/1177730150.full) in chapter 5.
 
-This is a wrapper to remove missing data by pair; and then call the usual hoeffdingd to return the adequate value.
+This is a wrapper to remove missing data by pair, and then call the core hoeffdingd to return the adequate value.
 
 """
 function hoeffdingd(a::AbstractVector{Union{Missing,T}}, b::AbstractVector{Union{Missing,T}}) where {T <: Number}
@@ -46,7 +49,9 @@ end
 
 Compute the Hoeffding measure of independence of the two continuous random variables. As defined by Hoeffding [A Non-Parametric Test of Independence](https://projecteuclid.org/journals/annals-of-mathematical-statistics/volume-19/issue-4/A-Non-Parametric-Test-of-Independence/10.1214/aoms/1177730150.full) in chapter 5.
 
-The implementation relies on StatsBase.tiedrank(a) and LazyArrays (@~) to improve performance.
+Compute the Hoeffding measure of dependence (D) together with the result of the test of independence when α is presented.
+Check that α is between 0 and 1. 
+Return the results from the core hoeffdingd and the result of the independence test in a tuple.
 
 """
 function hoeffdingd(a::AbstractVector{<:T}, b::AbstractVector{<:T}, α=.05) where {T <: Number}
@@ -63,7 +68,11 @@ end
 
 Compute the Hoeffding measure of independence of the two continuous random variables. As defined by Hoeffding [A Non-Parametric Test of Independence](https://projecteuclid.org/journals/annals-of-mathematical-statistics/volume-19/issue-4/A-Non-Parametric-Test-of-Independence/10.1214/aoms/1177730150.full) in chapter 5.
 
-The implementation relies on StatsBase.tiedrank(a) and LazyArrays (@~) to improve performance.
+Returns missing when there is not enough observations (less than 5).
+
+The implementation relies on:
+    StatsBase.tiedrank(a) to avoid duplication, 
+    and LazyArrays (@~) to improve performance.
 
 """
 function hoeffdingd(a::AbstractVector{<:T}, b::AbstractVector{<:T}) where {T <: Number}
@@ -98,7 +107,7 @@ end
 """
     hoeffdingd(m::AbstractMatrix{<:T}, α=.05) where {T <: Number}
 
-Compute the Hoeffding measure of independence and hte test of independence for each pair of columns in the matrix m.
+Compute the Hoeffding measure of independence and the test of independence for each pair of columns in the matrix m.
 Returns a matrix with the results.
 
 """
@@ -138,7 +147,6 @@ function hoeffdingd(m::AbstractMatrix{<:T}) where {T <: Number}
     return results
 
 end
-
 
 
 end 

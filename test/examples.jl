@@ -1,26 +1,8 @@
-using Plots# , HoeffdingD
+using Plots
 using StatsBase
 using BenchmarkTools
-
-# ρ(N, α) = √(2 * (N^2 + 5 * N - 32) / (9N * (N - 1) * (N - 3) * (N - 4) * α ))
-
-# n = 5:100
-# αs = 0:0.02:1
-# ys = ρ.(n, α)
-
-# plot(n, ρ.(n, 0.05), label="α=0.05", xlabel="n")
-# plot!(n, ρ.(n, 0.1), label="α=0.1")
-# plot!(n, ρ.(n, 0.2), label="α=0.2")
-# plot!(n, ρ.(n, 0.02), label="α=0.5")
-# plot!(n, ρ.(n, 0.01), label="α=0.5")
-
-
-# @btime corspearman(x, y_linear)
-# @btime StatsBase.cor(x, y_linear)
-# @btime HoeffdingD.hoeffdingd(x, y_linear)
-
-# using Distributions, Distances, EnergyStatistics
-using Distributions, HoeffdingD
+using Distributions
+using HoeffdingD
 
 function compareD(interval=-√(0.99):0.05:√(0.99))
     ρ = collect(interval) # -1:0.02:1
@@ -50,7 +32,7 @@ function compareD(interval=-√(0.99):0.05:√(0.99))
     return Pmeans, Hmeans, ρ
 end
 
-
+Pmeans, Hmeans, ρ = compareD()
 
 plot(ρ, Pmeans)
 plot!(ρ, Hmeans)
