@@ -12,7 +12,7 @@ using LazyArrays ## for @~ to speed up Qi calculations
     Given a D value, a n representing the number of observations, and α (0 < α < 1) the desired level of significance.
 
     Return true to indicate rejection of H0 the hypothesis of independence.
-    The implementation is based upong the chapter 9 in the paper from Wassily Hoeffding..
+    The implementation is based upong the chapter 9 in the paper from Wassily Hoeffding.
 
 """
 
