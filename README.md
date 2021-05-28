@@ -8,5 +8,17 @@ Enter the Pkg REPL by pressing ```]``` from the Julia REPL. Then install the pac
 
 ## Usage
 
+Here we demonstrate the classic example of detecting linear and quadratic relationships with Hoeffding measure contrasted with Perason Correlation and Spearman's rank correlations.
+
+### Data generation
+'''julia 
+x = -2:0.1:2
+linear_f(x) = 2x ; quad_f(x) = x^2
+y_linear = linear_f.(x)
+y_quad = quad_f.(x)
+'''
+
+
+
 ## Reference
 links
