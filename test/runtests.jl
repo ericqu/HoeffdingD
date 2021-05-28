@@ -39,7 +39,7 @@ b = ab[:, 2]
 
 
 @testset "HoeffdingD" begin
-
+    #results values are from SAS PROC Corr 
     @test isapprox(0.1108736664, HoeffdingD.hoeffdingd(a, b))
     @test isapprox(0.1108736664, HoeffdingD.hoeffdingd(b, a))
     @test isapprox(0.9665923259, HoeffdingD.hoeffdingd(b, b))
