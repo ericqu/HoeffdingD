@@ -82,16 +82,16 @@ using Distributions
 end
 
 
-using BenchmarkTools
+# using BenchmarkTools
 
-@btime HoeffdingD.hoeffdingd(a, b)
-@btime HoeffdingD.hoeffdingd(b, a)
-@btime HoeffdingD.hoeffdingd(ab)
+# @btime HoeffdingD.hoeffdingd(a, b)
+# @btime HoeffdingD.hoeffdingd(b, a)
+# @btime HoeffdingD.hoeffdingd(ab)
 
-@btime HoeffdingD.hoeffdingd(a, b, 0.05)
-@btime HoeffdingD.hoeffdingd(b, a, 0.05)
-@btime HoeffdingD.hoeffdingd(ab, 0.05)
+# @btime HoeffdingD.hoeffdingd(a, b, 0.05)
+# @btime HoeffdingD.hoeffdingd(b, a, 0.05)
+# @btime HoeffdingD.hoeffdingd(ab, 0.05)
 
-@btime HoeffdingD.hoeffdingd( [9, 8,  7.,  missing,    missing,    2,          5, 10, 2], 
-            [6, 5,  4.,  missing,    3,          missing,    -5, 1000, 4])
+# @btime HoeffdingD.hoeffdingd( [9, 8,  7.,  missing,    missing,    2,          5, 10, 2], 
+#             [6, 5,  4.,  missing,    3,          missing,    -5, 1000, 4])
 
