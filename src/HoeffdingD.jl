@@ -45,7 +45,7 @@ function hoeffdingd(a::AbstractVector{Union{Missing,T}}, b::AbstractVector{Union
 end
 
 """
-    function hoeffdingd(a::AbstractVector{<:T}, b::AbstractVector{<:T}, α=.05) where {T <: Number}
+    function hoeffdingd(a::AbstractVector{<:T}, b::AbstractVector{<:T}, α) where {T <: Number}
 
 Compute the Hoeffding measure of independence of the two continuous random variables. As defined by Hoeffding [A Non-Parametric Test of Independence](https://projecteuclid.org/journals/annals-of-mathematical-statistics/volume-19/issue-4/A-Non-Parametric-Test-of-Independence/10.1214/aoms/1177730150.full) in chapter 5.
 
@@ -54,7 +54,7 @@ Check that α is between 0 and 1.
 Return the results from the core hoeffdingd and the result of the independence test in a tuple.
 
 """
-function hoeffdingd(a::AbstractVector{<:T}, b::AbstractVector{<:T}, α=.05) where {T <: Number}
+function hoeffdingd(a::AbstractVector{<:T}, b::AbstractVector{<:T}, α) where {T <: Number}
     if (α <= 0)  || (α >= 1)  
         throw(DomainError(α, "α must be: 0 < α < 1"))
     end
@@ -105,13 +105,13 @@ function hoeffdingd(a::AbstractVector{<:T}, b::AbstractVector{<:T}) where {T <: 
 end
 
 """
-    hoeffdingd(m::AbstractMatrix{<:T}, α=.05) where {T <: Number}
+    hoeffdingd(m::AbstractMatrix{<:T}, α) where {T <: Number}
 
 Compute the Hoeffding measure of independence and the test of independence for each pair of columns in the matrix m.
 Returns a matrix with the results.
 
 """
-function hoeffdingd(m::AbstractMatrix{<:T}, α=.05) where {T <: Number}
+function hoeffdingd(m::AbstractMatrix{<:T}, α) where {T <: Number}
 
     cols = size(m)[2]
     results = Array{Tuple{Float64, Bool}}(undef, cols, cols)
